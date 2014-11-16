@@ -1,0 +1,10 @@
+#lang R5RS
+(define get-Type
+  (lambda (x)
+    (cond ((number? x) "Number")
+          ((pair? x) "Pair")
+          ((string? x) "String")
+          ((list? x) "List")
+          ((vector? x) "Vector")
+          ((boolean? x) "Boolean")
+          ((symbol? x) "Symbol")          ))) 
