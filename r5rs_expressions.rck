@@ -70,12 +70,28 @@
               (else (modd? (- x 1))))))
          (modd?
           (lambda (x)
-                (meven? (- x 1))))
-         )
+                (meven? (- x 1)))))
   
   (out.ln (meven? 100))  )
+
+  
+; named let
+(let f ((x 0) (count 0))
+(if (< x 100) (f (+ x 1) (+ count x) )  count)  )
+
+  
+;sequnce
+(begin (out.ln 'a) (out.ln 'b))
+
+
+;do iter
+(out.ln (do ((i  1 (+ i 1) ) (count 0 (+ count i) ) )
+  ((> i 100) count)))
 
 ;delay; promise
 (set! x (delay (begin (out.ln "out") (+ 3 4))))
 out.ln x
+
+
+
 
