@@ -1,0 +1,81 @@
+#lang R5RS
+(#%require "r5rs_prelude.rck")
+
+(out.ln (get-type #t))
+(out.ln (get-type 100))
+(out.ln (get-type "string"))
+(out.ln (get-type '+))
+(out.ln (get-type 'var))
+(out.ln (get-type '(1 2)))
+(out.ln (get-type #(1 2 3 4)))
+(out.ln (get-type '(1 2 3 4)))
+(out.ln " ")
+
+
+(define x 100)
+(out.ln x)
+
+(quote a)
+(out.ln 'a) ; same as above
+
+(out.ln ((if (< 3 4) * +) 3 4))
+
+
+;lower is closure
+(define (add_by_x x)
+  (lambda (y)
+    (+ x y)
+    ))
+(out.ln ((add_by_x 5) 6))
+
+((lambda () (out.ln 'first) (out.ln 'second))); inexplicit (begin ...)
+
+;if
+(out.ln (if (< 3 4) 'a 'b))
+
+;assign
+(define xx 'xx)
+(set! xx 'yy)
+(out.ln xx)
+
+;conditions
+(set! x
+      (cond ((> 3 4) 'case_a)
+            ((> 3 5) 'case_b)
+            (else 'case_c))
+      )
+(out.ln x)
+
+
+;case
+(set! x 1001)
+(case x
+  (100 (out.ln 'first))
+  (101 (out.ln 'second))
+  (else (out.ln 'third)))
+       
+
+;let
+(let ((x 2) (y 3))
+  (out.ln x)
+  (out.ln y))
+
+
+(letrec (
+         (meven? 
+          (lambda (x) 
+            (cond 
+              ((= x 0) #t)
+              ((= x 1) #f)
+              (else (modd? (- x 1))))))
+         (modd?
+          (lambda (x)
+                (meven? (- x 1))))
+         )
+  
+  (out.ln (meven? 100))  )
+
+;delay; promise
+(set! x (delay (begin (out.ln "out") (+ 3 4))))
+out.ln x
+
