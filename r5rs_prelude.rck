@@ -1,7 +1,6 @@
 #lang R5RS
 (#%provide (all-defined))
 
-(#%require (planet williams/describe/describe))
 (define get-type
   (lambda (x)
     (cond ((number? x) "Number")
