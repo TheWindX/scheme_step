@@ -79,3 +79,35 @@
 (set! x (delay (begin (out.ln "out") (+ 3 4))))
 out.ln x
 
+
+;quosiquote
+
+(out.ln `(+ 5 2 ,(+ 100 1) )); ` , is inverse, quote and unquote
+
+
+;named let iter
+(out.ln 
+ (let loop ((i 0) (count 0) )   
+      (if (<= i 100) (loop (+ i 1) (+ count i)) count)
+ )
+)
+
+;compare to this version
+(begin 
+  (define count 0) 
+  (define (count_base n)
+    (begin
+      (set! count (+ count n))
+      (if (not (= n 1))
+          (count_base (- n 1))
+       )
+    )
+  )
+  (count_base 100)
+  (out.ln count)
+)
+
+
+ 
+ 
+

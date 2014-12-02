@@ -1,0 +1,44 @@
+#lang R5RS
+(#%require "r5rs_prelude.rck")
+
+(define-syntax my-while
+  (syntax-rules ()
+               ((my-while test body ...)
+                (let loop ()
+                  (begin body ...)
+                         (if test
+                             (loop) )))))
+
+(begin
+  (define count 0)
+  (define iter 0)
+  (my-while (< iter 100)
+            (set! iter (+ iter 1))
+            (set! count (+ count iter)))
+  (out.ln count))
+
+                     
+
+
+(define-syntax my-for-each
+  (syntax-rules ()
+    ((my-for-each action list)
+      (let ((a (car list)) (b (cdr list)))
+        (if (not (equal? a '()))
+            (begin 
+              (out.ln 'iter)
+              (action a)
+              (out.ln 'iter1)
+              (my-for-each action b)))))))
+
+
+
+
+(my-for-each out.ln '(1 2 3 4 5 100))
+       
+
+
+
+
+
+
